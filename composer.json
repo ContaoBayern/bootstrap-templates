@@ -1,0 +1,36 @@
+{
+  "name": "contaobayern/bootstrap-templates",
+  "description": "Bootstrap templates for Contao CMS",
+  "type": "contao-bundle",
+  "keywords": ["contao", "bootstrap", "templates"],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Andreas Fieger",
+      "homepage": "https://github.com/fiedsch"
+    },
+    {
+      "name": "Markus Schnagl",
+      "homepage": "https://github.com/mstudio-dev"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/contaobayern/bootstrap-templates/issues",
+    "source": "https://github.com/contaobayern/bootstrap-templates"
+  },
+  "require": {
+    "php": "^8.3",
+    "contao/core-bundle": "^5.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Contaobayern\\BootstrapTemplatesBundle\\": "src/"
+    }
+  },
+  "extra": {
+    "contao-manager-plugin": "Contaobayern\\BootstrapTemplatesBundle\\ContaoManager\\Plugin",
+    "branch-alias": {
+      "dev-main": "1.0.x-dev"
+    }
+  }
+}

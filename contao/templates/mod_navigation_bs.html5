@@ -1,0 +1,36 @@
+<?php
+
+$this->wrapperAttributes = $this
+    ->attr($this->cssID)
+    ->addClass([$this->class, 'block'])
+    ->addClass(['navbar', 'navbar-expand-lg', 'bg-body-tertiary']) // TODO expand-<breakpoint> variabel gestalten
+    ->addStyle($this->style ?? '')
+    ->setIfExists('aria-label', $this->ariaLabel)
+    ->mergeWith($this->wrapperAttributes)
+;
+?>
+
+<!-- indexer::stop -->
+<a href="<?= $this->request ?>#<?= $this->skipId ?>" class="invisible"><?= $this->skipNavigation ?></a>
+<?php if ($this->headline): ?>
+    <<?= $this->hl ?>><?= $this->headline ?></<?= $this->hl ?>>
+<?php endif; ?>
+
+<nav<?= $this->wrapperAttributes ?> >
+
+<div class="container-fluid">
+    <a class="navbar-brand" href="#">[TODO: Home-Icon hier]</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+  <?= $this->items ?> <?php /* gerenderter Inhalt aus dem Template nav_bs_navbar.html */?>
+
+    </div>
+</div>
+
+</nav>
+<span id="<?= $this->skipId ?>" class="invisible"></span>
+<!-- indexer::continue -->
