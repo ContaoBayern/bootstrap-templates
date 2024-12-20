@@ -15,7 +15,7 @@ genutzt werden können.
 
 ## Anwendung
 
-Siehe Beispiele in der [Dokumentation](docs/index.md)
+Siehe Beispiele in der [Dokumentation](https://github.com/ContaoBayern/bootstrap-templates/blob/main/docs/index.md)
 
 
 ## Aktueller Stand
