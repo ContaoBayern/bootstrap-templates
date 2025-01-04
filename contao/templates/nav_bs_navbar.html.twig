@@ -1,0 +1,43 @@
+{% if level == 'level_1' %}
+    {%  set classes = 'navbar-nav' %}
+    {%  set navitem  = 'nav-item' %}
+    {%  set linkclass = 'nav-link' %}
+    {%  set attr = "attribut" %} {# TODO_ past das so -- schaut komisch aus, da 'attribut' deutsch ist #}
+{% else %}
+    {%  set classes = 'dropdown-menu' %}
+    {%  set navitem = '' %}
+    {%  set linkclass = 'dropdown-item' %}
+    {%  set attr = '' %}
+{% endif %}
+
+<ul class="{{ level }} {{ classes }}" {{ attr }}>
+     {% for item in items %}
+        {% if item.isActive %}
+            <li class="{{ navitem }} {{ item.class }}">
+              <strong
+                class="{{ item.class }} {{ linkclass }}"
+                {% if item.subitems is not empty %}
+                    data-bs-toggle="dropdown" aria-haspopup="true"
+                {% endif %}
+              >
+                {{ item.link }}
+              </strong>
+            {{ item.subitems|default|raw }}
+        {% else %}
+            <li class="{{ navitem }} {{ item.class }} dropdown">
+                <a
+                   href="{{ item.href|default('./') }}"
+                   title="{{ item.pageTitle|default(item.title) }}"
+                   class="{{ item.class }} {{ linkclass }} {% if item.subitems is not empty %}dropdown-toggle{% endif %}"
+                    {% if item.accesskey is not empty %}accesskey="{{ item.accesskey }}"{% endif %}
+                    {% if item.tabindex|default is not empty %}tabindex="{{ item.tabindex }}"{% endif %}
+                    {{ item.target }} {{ item.rel|default }}
+                    {% if item.subitems is not empty %}data-bs-toggle="dropdown" aria-haspopup="true"{% endif %}
+                >
+                    {{ item.link }}
+                </a>
+                {{ item.subitems|raw }}
+            </li>
+        {% endif %}
+    {% endfor %}
+</ul>

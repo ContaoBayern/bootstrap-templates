@@ -1,0 +1,28 @@
+{# TODO: die folgenden drei Variablen sollten aus einem erweiterten Navigations-Modul gelesen werden #}
+{% set breakpoint = 'lg' %}
+{% set homeIcon = '[Home-Icon hier]' %}
+{% set navbarClass = 'navbar-light bg-tertiary' %}
+{%  set navbarAttributes = attrs(navbarAttributes|default)
+    .addClass(['navbar', navbarClass, 'navbar-expand-'~breakpoint])
+    .addClass(class)
+    .addStyle(style)
+    .set('aria-label', ariaLabel)
+%}
+<!-- indexer::stop -->
+<a href="{{ request }}#{{ skipId }}" class="invisible">{{ skipNavigation }}</a>
+{%  if headline %}
+    <{{ hl }}>{{ headline }}</{{ hl }}>
+{% endif %}
+<nav {{ cssID|raw }} {{ navbarAttributes }}>
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">{{ homeIcon }}</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            {{ items|raw }} {# gerenderter Inhalt aus dem Template nav_bs_navbar.html #}
+        </div>
+    </div>
+</nav>
+<span id="{{ skipId }}" class="invisible"></span>
+<!-- indexer::continue -->
