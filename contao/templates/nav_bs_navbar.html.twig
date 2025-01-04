@@ -1,16 +1,19 @@
 {% if level == 'level_1' %}
-    {%  set classes = 'navbar-nav' %}
+    {%  set navbarClass = 'navbar-nav' %}
     {%  set navitem  = 'nav-item' %}
     {%  set linkclass = 'nav-link' %}
-    {%  set attr = "attribut" %} {# TODO_ past das so -- schaut komisch aus, da 'attribut' deutsch ist #}
 {% else %}
-    {%  set classes = 'dropdown-menu' %}
+    {%  set navbarClass = 'dropdown-menu' %}
     {%  set navitem = '' %}
     {%  set linkclass = 'dropdown-item' %}
-    {%  set attr = '' %}
 {% endif %}
+{%  set listAttributes = attrs()
+    .addClass(level)
+    .addClass(navbarClass)
+    .addClass('mr-auto')
+%}
 
-<ul class="{{ level }} {{ classes }}" {{ attr }}>
+<ul {{ listAttributes }}>
      {% for item in items %}
         {% if item.isActive %}
             <li class="{{ navitem }} {{ item.class }}">
