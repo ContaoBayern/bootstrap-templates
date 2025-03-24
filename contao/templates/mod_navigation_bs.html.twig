@@ -6,7 +6,7 @@
     .addClass(['navbar', navbarClass, 'navbar-expand-'~breakpoint])
     .addClass(class)
     .addStyle(style)
-    .set('aria-label', ariaLabel)
+    .set('aria-label', ariaLabel|default)
 %}
 <!-- indexer::stop -->
 <a href="{{ request }}#{{ skipId }}" class="invisible">{{ skipNavigation }}</a>
