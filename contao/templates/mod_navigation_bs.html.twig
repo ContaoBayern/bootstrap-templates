@@ -1,19 +1,18 @@
-{% extends '@Contao/frontend_module/_base.html.twig' %}
+{# {% extends '@Contao/frontend_module/_base.html.twig' %} #} {# do NOT extend as we do not want a wrapper block #}
 
-{% block variables %}
-{# TODO: die folgenden drei Variablen sollten aus einem erweiterten Navigations-Modul gelesen werden #}
-{% set breakpoint = 'lg' %}
-{% set homeIcon = '[Home-Icon hier]' %}
-{% set navbarClass = 'navbar-light bg-tertiary' %}
-{%  set navbarAttributes = attrs(navbarAttributes|default)
-    .addClass(['navbar', navbarClass, 'navbar-expand-'~breakpoint])
-    .addClass(class)
-    .addStyle(style)
-    .set('aria-label', ariaLabel|default)
-%}
-{% endblock %}
 
 {% block content %}
+    {# TODO: die folgenden drei Variablen sollten aus einem erweiterten Navigations-Modul gelesen werden #}
+    {% set breakpoint = 'lg' %}
+    {% set homeIcon = homeIcon|default('[Home-Icon hier]') %}
+    {% set navbarClass = 'navbar-light bg-tertiary' %}
+    {% set navbarAttributes = attrs(navbarAttributes|default)
+        .addClass(['navbar', navbarClass, 'navbar-expand-'~breakpoint])
+        .addClass(class)
+        .addStyle(style)
+        .set('aria-label', ariaLabel|default)
+    %}
+
     <a href="{{ request }}#{{ skipId }}" class="invisible">{{ skipNavigation }}</a>
     {%  if headline %}
         <{{ hl }}>{{ headline }}</{{ hl }}>

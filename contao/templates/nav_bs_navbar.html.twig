@@ -1,52 +1,59 @@
-{% extends '@Contao/frontend_module/_base.html.twig' %}
+{# {% extends '@Contao/frontend_module/_base.html.twig' %}  #} {# do NOT extend as we do not want a wrapper block #}
 
-{% block variables %}
+{% block content %}
+
     {% if level == 'level_1' %}
-        {%  set navbarClass = 'navbar-nav' %}
-        {%  set navitem  = 'nav-item' %}
-        {%  set linkclass = 'nav-link' %}
+      {#  topmost level #}
+        {%  set itemType='nav-item' %}
+        {% set navbarClass = 'navbar-nav' %}
+        {% set navitemClass = 'nav-item' %}
     {% else %}
-        {%  set navbarClass = 'dropdown-menu' %}
-        {%  set navitem = '' %}
-        {%  set linkclass = 'dropdown-item' %}
+      {# level2 and below #}
+        {%  set itemType='dropdown-item' %}
+        {% set navbarClass = 'dropdown-menu' %}
+        {% set navitemClass = '' %}
     {% endif %}
-    {%  set listAttributes = attrs()
+
+
+    {% set listAttributes = attrs(listAttributes|default)
         .addClass(level)
         .addClass(navbarClass)
         .addClass('mr-auto')
     %}
-{% endblock %}
 
-{% block content %}
-<ul {{ listAttributes }}>
-     {% for item in items %}
-        {% if item.isActive %}
-            <li class="{{ navitem }} {{ item.class }}">
-              <strong
-                class="{{ item.class }} {{ linkclass }}"
-                {% if item.subitems is not empty %}
-                    data-bs-toggle="dropdown" aria-haspopup="true"
-                {% endif %}
-              >
-                {{ item.link }}
-              </strong>
-            {{ item.subitems|default|raw }}
-        {% else %}
-            <li class="{{ navitem }} {{ item.class }} dropdown">
+
+    <ul {{ listAttributes }}>
+        {% for item in items %}
+            {% if item.subitems is not empty %}
+              <li class="{{ navitemClass }} dropdown">
                 <a
-                   href="{{ item.href|default('./') }}"
-                   title="{{ item.pageTitle|default(item.title) }}"
-                   class="{{ item.class }} {{ linkclass }} {% if item.subitems is not empty %}dropdown-toggle{% endif %}"
-                    {% if item.accesskey is not empty %}accesskey="{{ item.accesskey }}"{% endif %}
-                    {% if item.tabindex|default is not empty %}tabindex="{{ item.tabindex }}"{% endif %}
-                    {{ item.target }} {{ item.rel|default }}
-                    {% if item.subitems is not empty %}data-bs-toggle="dropdown" aria-haspopup="true"{% endif %}
+                   class="nav-link dropdown-toggle {{ item.classXX|default }}" {# item.class contains 'active' if the item is the currently selected one -- set by Contao #}
+                   href="#"
+                   id="navid_{{ item.id }}"
+                   role="button"
+                   data-bs-toggle="dropdown"
+                   aria-expanded="false"
                 >
                     {{ item.link }}
                 </a>
-                {{ item.subitems|raw }}
-            </li>
-        {% endif %}
-    {% endfor %}
-</ul>
+                  <ul class="{{ navbarClass }}" aria-labelledby="navid_{{ item.id }}">
+                      {{ item.subitems|raw }}
+                  </ul>
+                </li>
+            {% else %}
+                <li class="{{ navitemClass }}">
+                    <a
+                       class="{% if level == 'level_1' %}nav-link{%  else %}{% endif%} {{ itemType }} {{ item.class }}"
+                       href="{{ item.href|default('./') }}"
+                       title="{{ item.pageTitle|default(item.title) }}"
+                       {% if item.accesskey is not empty %}accesskey="{{ item.accesskey }}"{% endif %}
+                       {% if item.tabindex|default is not empty %}tabindex="{{ item.tabindex }}"{% endif %}
+                       {{ item.target }} {{ item.rel|default }}
+                    >
+                        {{ item.link }}
+                    </a>
+                </li>
+            {% endif %}
+        {% endfor %}
+    </ul>
 {% endblock %}
