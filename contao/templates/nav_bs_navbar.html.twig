@@ -1,18 +1,23 @@
-{% if level == 'level_1' %}
-    {%  set navbarClass = 'navbar-nav' %}
-    {%  set navitem  = 'nav-item' %}
-    {%  set linkclass = 'nav-link' %}
-{% else %}
-    {%  set navbarClass = 'dropdown-menu' %}
-    {%  set navitem = '' %}
-    {%  set linkclass = 'dropdown-item' %}
-{% endif %}
-{%  set listAttributes = attrs()
-    .addClass(level)
-    .addClass(navbarClass)
-    .addClass('mr-auto')
-%}
+{% extends '@Contao/frontend_module/_base.html.twig' %}
 
+{% block variables %}
+    {% if level == 'level_1' %}
+        {%  set navbarClass = 'navbar-nav' %}
+        {%  set navitem  = 'nav-item' %}
+        {%  set linkclass = 'nav-link' %}
+    {% else %}
+        {%  set navbarClass = 'dropdown-menu' %}
+        {%  set navitem = '' %}
+        {%  set linkclass = 'dropdown-item' %}
+    {% endif %}
+    {%  set listAttributes = attrs()
+        .addClass(level)
+        .addClass(navbarClass)
+        .addClass('mr-auto')
+    %}
+{% endblock %}
+
+{% block content %}
 <ul {{ listAttributes }}>
      {% for item in items %}
         {% if item.isActive %}
@@ -44,3 +49,4 @@
         {% endif %}
     {% endfor %}
 </ul>
+{% endblock %}
