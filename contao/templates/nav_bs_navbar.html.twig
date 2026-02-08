@@ -27,7 +27,7 @@
             {% if item.subitems is not empty %}
               <li class="{{ navitemClass }} dropdown">
                 <a
-                   class="nav-link dropdown-toggle {{ item.classXX|default }}" {# item.class contains 'active' if the item is the currently selected one -- set by Contao #}
+                   class="nav-link dropdown-toggle {{ item.class|default }}" {# item.class contains 'active' if the item is the currently selected one -- set by Contao #}
                    href="#"
                    id="navid_{{ item.id }}"
                    role="button"
