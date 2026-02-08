@@ -25,4 +25,5 @@ Noch nicht geeignet für den Einsatz auf produktiv-Sites, da die Templates sich 
 
 ## Roadmap
 
-* `*.html5` Templates durch `*.html.twig` ersetzen
+* ~~`*.html5` Templates durch `*.html.twig` ersetzen~~
+* Weitere Templates (Forms, ...)
