@@ -3,9 +3,9 @@
 
 {% block content %}
     {# TODO: die folgenden drei Variablen sollten aus einem erweiterten Navigations-Modul gelesen werden #}
-    {% set breakpoint = 'lg' %}
+    {% set breakpoint = breakpoint|default('lg') %}
     {% set homeIcon = homeIcon|default('[Home-Icon hier]') %}
-    {% set navbarClass = 'navbar-light bg-tertiary' %}
+    {% set navbarClass = navbarClass|default('navbar-light bg-tertiary') %}
     {% set navbarAttributes = attrs(navbarAttributes|default)
         .addClass(['navbar', navbarClass, 'navbar-expand-'~breakpoint])
         .addClass(class)
